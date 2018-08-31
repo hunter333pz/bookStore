@@ -1,5 +1,6 @@
 package com.example.hunter333.bookStore.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,17 +10,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * 
  * @author Hunter333 on 25.08.2018
  *
  */
 @Entity
-public class Author {
+public class Author implements Serializable {
+	private static final long serialVersionUID = -7291150346323583198L;
+	@Expose
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Expose
 	private String firstName;
+	@Expose
 	private String lastName;
 
 	@ManyToMany(mappedBy = "authors")

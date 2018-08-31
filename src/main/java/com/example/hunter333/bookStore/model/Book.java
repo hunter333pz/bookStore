@@ -1,5 +1,6 @@
 package com.example.hunter333.bookStore.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * 
  * @author Hunter333 on 28.08.2018
@@ -22,17 +25,21 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "BOOK")
-public class Book {
+public class Book implements Serializable {
 
+	private static final long serialVersionUID = -2439415413335495557L;
+	@Expose
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String title;
 	private String isbn;
 
+	@Expose
 	@OneToOne(cascade = CascadeType.ALL)
 	private Publisher publisher;
 
+	@Expose
 	@ManyToMany
 	@JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
 	private Set<Author> authors = new HashSet<Author>();
