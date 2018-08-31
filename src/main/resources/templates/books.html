@@ -2,24 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link href="webjars/bootstrap/4.1.0/css/bootstrap.min.css"
+	rel="stylesheet" media="screen" />
 <title>Spring Guru Tutorial</title>
 </head>
 <body>
 	<h1>Product list</h1>
-	<table>
+	<table class="table table-striped">
 		<tr>
 			<th>ID</th>
 			<th>Title</th>
 			<th>Author</th>
+			<th>Publisher</th>
 		</tr>
 		<tr th:each="book : ${books}">
 			<td th:text="${book.id}"></td>
 			<td th:text="${book.title}"></td>
 			<td>
-				<ul th:each="author : ${book.authors}">
-					<li th:text="${author.firstName} + ${author.lastName}"></li>
+				<ul class="list-group" th:each="author : ${book.authors}">
+					<li class="list-group-item"
+						th:text="${author.firstName} + ${author.lastName}"></li>
 				</ul>
 			</td>
+			<td th:text="${book.publisher.name}"></td>
 		</tr>
 	</table>
 
