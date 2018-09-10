@@ -9,7 +9,9 @@ import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.hunter333.bookStore.model.Author;
 import com.example.hunter333.bookStore.model.Book;
+import com.example.hunter333.bookStore.model.Publisher;
 import com.example.hunter333.bookStore.repository.AuthorRepository;
 import com.example.hunter333.bookStore.repository.BookRepository;
 import com.example.hunter333.bookStore.repository.PublisherRepository;
@@ -38,22 +40,11 @@ public class RestControllerAPI {
 
 	@RequestMapping("/hello")
 	public String sayHello() {
-		List<String> urls = new ArrayList<String>();
 
-		Method[] methods = this.getClass().getMethods();
-
-		for (Method method : methods) {
-			RequestMapping mappingAnnotation = method.getAnnotation(RequestMapping.class);
-
-			if (mappingAnnotation != null) {
-				urls.add(mappingAnnotation.value()[0]);
-			}
-
-		}
-		return "Hi" + new Gson().toJson(urls);
+		return "HeLLo";
 	}
 
-	@RequestMapping("/hello")
+	@RequestMapping("/getUrls")
 	public String getUrls() {
 		List<String> urls = new ArrayList<String>();
 
@@ -80,5 +71,16 @@ public class RestControllerAPI {
 	public String getBooks() {
 		ArrayList<Book> books = (ArrayList<Book>) bookrepository.findAll();
 		return gson.toJson(books);
+	}
+
+	@RequestMapping("/getAuthors")
+	public String getAuthors() {
+		List<Author> authors = (List<Author>) authorRepository.findAll();
+		return gson.toJson(authors);
+	}
+
+	public String getPublishers() {
+		List<Publisher> publishers = (List<Publisher>) publisherRepository.findAll();
+		return gson.toJson(publishers);
 	}
 }
